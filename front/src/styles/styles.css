@@ -1,0 +1,79 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.min-h-100vh {
+  min-height: 100vh;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Block with cards menu */
+.card-menu .mdc-layout-grid__cell {
+  display: flex;
+}
+
+.card-menu mat-card {
+  cursor: pointer;
+}
+
+/* Display center positioning */
+.d-center {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Flex: innter content to center vertically */
+.d-center-icon {
+  display: inline-flex;
+  vertical-align: sub;
+}
+
+/* for inner pages with toolbar */
+.d-center.inner-page {
+  min-height: calc(100vh - 64px);
+}
+
+/* Toolbar */
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+/* Card */
+
+/* Avatar icon */
+mat-card-header mat-icon[mat-card-avatar] {
+  font-size: 3rem !important;
+}
+
+/* Button with hidden menu */
+mat-card-header button[mat-icon-button] {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+/* Draggable card */
+.sortable mat-card {
+  cursor: move;
+}
+
+/* List */
+/* Small caption */
+small mat-icon {
+  font-size: 1rem !important;
+}

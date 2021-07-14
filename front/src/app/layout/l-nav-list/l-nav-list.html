@@ -1,0 +1,39 @@
+<div class="card-menu">
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet"
+           *ngIf="showCount && items.length > 0">
+        Всего: {{items.length}}
+      </div>
+
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet"
+           *ngIf="dates">
+        {{dates.start | date:'longDate' : '+0000'}} - {{dates.end | date:'longDate':'+0000'}}
+      </div>
+
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet"
+           *ngFor="let item of items">
+        <mat-card [routerLink]="item.id || item.url" app-elevation class="w-100">
+          <mat-card-content>
+            {{item.title}}
+            <div *ngIf="(item?.isActive === true || item?.isActive === false) || item?.date">
+              <small>
+                <ng-container *ngIf="item?.date">
+                  {{item.date | date:'longDate': '+0000'}}
+                </ng-container>
+                <ng-container *ngIf="item?.isActive === true || item?.isActive === false">
+                  <mat-icon class="d-center-icon"
+                            [matTooltip]="item.isActive ? 'Опубликовано' : 'Не опубликовано'"
+                  >
+                    {{item.isActive ? 'visibility' : 'visibility_off'}}
+                  </mat-icon>
+                </ng-container>
+              </small>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

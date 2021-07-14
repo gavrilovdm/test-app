@@ -1,0 +1,35 @@
+<div class="d-center min-h-100vh">
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+        <mat-card class="card-mw">
+          <mat-card-header>
+            <mat-card-title>Вход</mat-card-title>
+            <mat-card-subtitle>Введите логин и пароль</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="form">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Логин</mat-label>
+                <input matInput formControlName="login" autocomplete>
+                <mat-error *ngIf="form.controls.login.invalid">Введите логин</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Пароль</mat-label>
+                <input matInput formControlName="password" [type]="passwordShowState ? 'text' : 'password'"
+                       autocomplete>
+                <button mat-icon-button matSuffix (click)="passwordShowState = !passwordShowState">
+                  <mat-icon>{{passwordShowState ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="form.controls.password.invalid">Введите пароль</mat-error>
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button (click)="submit()" color="primary">Войти</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

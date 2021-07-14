@@ -1,0 +1,64 @@
+<mat-drawer-container autosize fullscreen>
+    <mat-drawer #drawer>
+        <mat-nav-list>
+            <ng-container *ngFor="let item of menu">
+                <a mat-list-item [routerLink]="item.url" (click)="drawer.close()">
+                    <mat-icon matListIcon>{{item.icon}}</mat-icon>
+                    <h3 matLine>{{item.title}}</h3>&nbsp;
+                </a>
+            </ng-container>
+        </mat-nav-list>
+    </mat-drawer>
+    <mat-toolbar class="mat-elevation-z2" color="primary">
+        <button (click)="drawer.open()" mat-icon-button type="button">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <button routerLink="/" mat-icon-button type="button">
+            <mat-icon>home</mat-icon>
+        </button>
+        <ng-container *ngIf="pageData?.backUrl">
+            <button mat-icon-button type="button" [routerLink]="pageData.backUrl">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="pageData?.actionBtns">
+            <mat-divider [vertical]="true" style="height:100%"></mat-divider>
+            <button mat-icon-button type="button" *ngFor="let actionBtn of pageData?.actionBtns"
+                    (click)="page.btnEvent(actionBtn.fnName)">
+                <mat-icon>{{actionBtn.icon}}</mat-icon>
+            </button>
+        </ng-container>
+        <span class="toolbar-spacer"></span>
+        <button mat-icon-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div class="content-wrapper">
+        <div class="content">
+            <div class="mdc-layout-grid" *ngIf="page.loadingState">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                        Загрузка:
+                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                    </div>
+                </div>
+            </div>
+            <div class="mdc-layout-grid" *ngIf="page.loadFail">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                        Нет данных
+                    </div>
+                </div>
+            </div>
+            <router-outlet></router-outlet>
+            <div class="mdc-layout-grid" *ngIf="router.url === '/'">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                        <p>Это панель управления.</p>
+                        <p>Откройте меню и выберите раздел.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-drawer-container>
